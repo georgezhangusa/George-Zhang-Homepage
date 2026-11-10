@@ -103,7 +103,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
   },
   {
     id: 'bbem',
-    title: 'BBEM System',
+    title: 'DePIN & VDR System',
     titleZh: '区块链综合能源盈利模型',
     subTitle: 'Blockchain-Based Energy Monetization Platform',
     subTitleZh: '楼宇建筑与分布式电池一体化能源综合管控平台',
