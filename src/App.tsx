@@ -8,7 +8,6 @@ import { Navbar } from './components/Navbar.tsx';
 import { HeroSection } from './components/HeroSection.tsx';
 import { ProjectCard } from './components/ProjectCard.tsx';
 import { ProjectModal } from './components/ProjectModal.tsx';
-import { ArchitectureSection } from './components/ArchitectureSection.tsx';
 import { FounderSection } from './components/FounderSection.tsx';
 import { ContactModal } from './components/ContactModal.tsx';
 import { Footer } from './components/Footer.tsx';
@@ -97,9 +96,6 @@ export default function App() {
             </div>
           )}
         </section>
-
-        {/* Architecture Infrastructure Section */}
-        <ArchitectureSection lang={lang} />
 
         {/* Founder & Contact Section */}
         <FounderSection

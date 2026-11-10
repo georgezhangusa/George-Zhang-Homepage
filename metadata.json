@@ -2,5 +2,7 @@
   "name": "George Zhang's AI Projects",
   "description": "Showcase and interactive portal for George Zhang's AI-powered software projects: Med Project, BESS System, and CPMS Portal.",
   "requestFramePermissions": [],
-  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
 }
