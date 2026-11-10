@@ -82,27 +82,27 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, lang, onOpenM
             <span>{project.iconEmoji}</span>
           </div>
 
-          <div className="flex flex-col items-end gap-0.5">
+          <div className="flex items-center">
             <span className={`px-2 py-0.5 rounded-full text-[10px] font-semibold border ${style.badgeBg}`}>
               {lang === 'zh' ? project.categoryLabelZh : project.categoryLabel}
-            </span>
-            <span className="text-[9px] text-slate-400 font-mono font-medium leading-none">
-              PROD LIVE
             </span>
           </div>
         </div>
 
-        {/* Title & Subtitle */}
-        <h2 className={`text-sm sm:text-base font-bold mb-0.5 text-slate-900 transition-colors leading-snug ${style.titleHover}`}>
-          {lang === 'zh' ? project.titleZh : project.title}
+        {/* Title */}
+        <h2 className="text-sm sm:text-base font-bold mb-1.5 leading-snug">
+          <a
+            href={project.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={`text-slate-900 transition-colors ${style.titleHover} hover:underline`}
+          >
+            {lang === 'zh' ? project.titleZh : project.title}
+          </a>
         </h2>
 
-        <p className="text-[10.5px] text-slate-500 font-medium mb-1.5 leading-tight">
-          {lang === 'zh' ? project.subTitleZh : project.subTitle}
-        </p>
-
-        {/* Description */}
-        <p className="text-[11.5px] text-slate-600 font-normal leading-snug mb-2.5 line-clamp-2">
+        {/* Description - Full display without truncation */}
+        <p className="text-[11.5px] text-slate-600 font-normal leading-relaxed mb-3">
           {lang === 'zh' ? project.descriptionZh : project.description}
         </p>
 
@@ -138,33 +138,19 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, lang, onOpenM
         </div>
       </div>
 
-      {/* Footer Action Buttons */}
-      <div className="pt-2 border-t border-slate-100 flex items-center justify-between gap-2">
-        
-        {/* Interactive Demo Trigger */}
-        <button
-          onClick={() => onOpenModal(project)}
-          aria-label={`Open interactive demo for ${project.title}`}
-          data-testid={`demo-btn-${project.id}`}
-          className={`flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-[11px] font-semibold border transition-all cursor-pointer shadow-2xs ${style.btnSecondary}`}
-        >
-          <Play className="w-3 h-3 fill-current" />
-          <span>{lang === 'zh' ? '交互推演' : 'Interactive Demo'}</span>
-        </button>
-
-        {/* Direct Link to System */}
+      {/* Footer Action Buttons - Directly Open Project Webpage */}
+      <div className="pt-2 border-t border-slate-100">
         <a
           href={project.url}
           target="_blank"
           rel="noopener noreferrer"
-          aria-label={`Visit ${project.title} on ${project.url}`}
-          data-testid={`visit-link-${project.id}`}
-          className={`inline-flex items-center gap-1 text-[11px] font-semibold ${style.accentText} hover:underline group-hover:translate-x-0.5 transition-transform`}
+          aria-label={`Open ${project.title} on ${project.url}`}
+          data-testid={`demo-btn-${project.id}`}
+          className={`w-full flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-[11.5px] font-semibold border transition-all cursor-pointer shadow-2xs ${style.btnSecondary} hover:shadow-xs`}
         >
-          <span>{lang === 'zh' ? '访问系统' : 'Visit System'}</span>
-          <ArrowRight className="w-3 h-3" />
+          <span>{lang === 'zh' ? '直接打开对应网页' : 'Open Website'}</span>
+          <ExternalLink className="w-3.5 h-3.5" />
         </a>
-
       </div>
 
     </div>
