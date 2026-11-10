@@ -107,7 +107,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
     titleZh: '区块链综合能源盈利模型',
     subTitle: 'Blockchain-Based Energy Monetization Platform',
     subTitleZh: '楼宇建筑与分布式电池一体化能源综合管控平台',
-    description: 'Blockchain-based energy monetization models coordinate commercial and residential energy arbitrage with PV solar generation, battery storage systems (BESS), and vehicle-to-grid (V2G) technology as a Virtual Power Plant (VPP).',
+    description: 'Blockchain-based energy monetization models that enable energy arbitrage using PV solar generation, battery storage systems (BESS), and vehicle-to-grid (V2G) technology as a Virtual Power Plant (VPP).',
     descriptionZh: '基于区块链的分布式综合能源管理系统，协调分布式光伏消纳与储能及电动车电池充放协同。',
     fullOverview: 'Blockchain-Based building automation systems with localized battery energy storage and solar photovoltaics. It provides holistic energy orchestration, demand charge reduction, dynamic HVAC load shedding, and optimal carbon footprint minimization.',
     fullOverviewZh: 'BBEM 将楼宇自动化自控系统 (BAS) 与分布式储能、屋顶分布式光伏深度耦合，通过负荷预测与储能充放电协同，有效抑制建筑最大需量电费，促进清洁绿电就地 100% 消纳。',
