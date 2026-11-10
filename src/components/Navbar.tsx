@@ -31,26 +31,26 @@ export const Navbar: React.FC<NavbarProps> = ({ lang, onSelectLang, onOpenContac
   const currentLang = languages.find(l => l.code === lang) || languages[0];
 
   return (
-    <header className="sticky top-0 z-40 w-full border-b border-slate-200/80 bg-white/85 backdrop-blur-xl transition-colors">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
+    <header className="sticky top-0 z-40 w-full border-b border-slate-300 bg-slate-200/95 backdrop-blur-md transition-colors shadow-xs">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 h-12 sm:h-13 flex items-center justify-between">
         
         {/* Brand */}
         <a 
           href="https://gz2ai.com" 
           target="_blank" 
           rel="noopener noreferrer" 
-          className="flex items-center gap-3 group focus:outline-none"
+          className="flex items-center gap-2.5 group focus:outline-none"
         >
-          <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 p-[1.5px] shadow-sm shadow-indigo-500/20 group-hover:shadow-indigo-500/30 transition-shadow">
-            <div className="w-full h-full bg-slate-900 rounded-[10px] flex items-center justify-center text-xs font-bold font-mono tracking-tighter text-indigo-300">
+          <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-gradient-to-tr from-indigo-600 via-purple-600 to-pink-500 p-[1.5px] shadow-xs shadow-indigo-500/20 group-hover:shadow-indigo-500/30 transition-shadow">
+            <div className="w-full h-full bg-slate-900 rounded-[6px] flex items-center justify-center text-[10px] sm:text-xs font-bold font-mono tracking-tight text-indigo-300">
               GZ
             </div>
           </div>
           <div className="text-left">
-            <span className="text-sm font-bold tracking-tight text-slate-900 group-hover:text-indigo-600 transition-colors">
+            <span className="text-xs sm:text-sm font-bold tracking-tight text-slate-900 group-hover:text-indigo-600 transition-colors leading-tight block">
               George Zhang
             </span>
-            <p className="text-[11px] text-slate-500 hidden sm:block font-light">
+            <p className="text-[10px] text-slate-500 hidden sm:block font-light leading-none mt-0.5">
               {lang === 'zh' ? '人工智能驱动软件生态系统' : 'AI-Powered Software Suite'}
             </p>
           </div>
@@ -65,7 +65,7 @@ export const Navbar: React.FC<NavbarProps> = ({ lang, onSelectLang, onOpenContac
               aria-haspopup="listbox"
               aria-expanded={dropdownOpen}
               aria-label="Language selection dropdown menu"
-              className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-700 hover:text-slate-900 bg-slate-100 hover:bg-slate-200/80 border border-slate-200 transition-all cursor-pointer shadow-2xs"
+              className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium text-slate-800 hover:text-slate-900 bg-white hover:bg-slate-50 border border-slate-300/80 transition-all cursor-pointer shadow-2xs"
             >
               <Globe className="w-3.5 h-3.5 text-indigo-600" />
               <span>{currentLang.native}</span>

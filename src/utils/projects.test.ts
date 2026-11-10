@@ -102,7 +102,7 @@ test('filterProjects correctly handles category and text queries', () => {
       demoType: 'med'
     },
     {
-      id: 'bess',
+      id: 'ems-bess',
       title: 'BESS System',
       titleZh: 'BESS 储能系统',
       subTitle: 'Battery Storage',
@@ -125,7 +125,7 @@ test('filterProjects correctly handles category and text queries', () => {
       metrics: [],
       highlights: [],
       techStack: ['Python', 'Time-series'],
-      demoType: 'bess'
+      demoType: 'ems-bess'
     }
   ];
 
@@ -135,5 +135,57 @@ test('filterProjects correctly handles category and text queries', () => {
 
   const textFiltered = filterProjects(mockProjects, 'all', 'energy');
   assert.equal(textFiltered.length, 1);
-  assert.equal(textFiltered[0].id, 'bess');
+  assert.equal(textFiltered[0].id, 'ems-bess');
+});
+
+test('calculateAidcSimulation computes PUE and cooling power', async () => {
+  const { calculateAidcSimulation } = await import('./projects.ts');
+  const result = calculateAidcSimulation({
+    gpuUtilizationPct: 80,
+    ambientTempC: 25,
+    rackPowerKw: 50
+  });
+
+  assert.ok(result.pue >= 1.1 && result.pue <= 1.4);
+  assert.ok(result.coolingPowerKw > 0);
+  assert.equal(result.efficiencyTier, 'Optimal');
+});
+
+test('calculateBatSoh predicts degradation and internal resistance', async () => {
+  const { calculateBatSoh } = await import('./projects.ts');
+  const result = calculateBatSoh({
+    cycles: 2000,
+    chargeCRate: 1.0,
+    avgOperatingTempC: 30,
+    dodPct: 80
+  });
+
+  assert.ok(result.sohPct < 100 && result.sohPct > 70);
+  assert.ok(result.internalResistanceMohm > 28);
+  assert.ok(result.remainingUsefulCycles > 0);
+});
+
+test('calculateCpemLoad checks dynamic power curtailment against transformer capacity', async () => {
+  const { calculateCpemLoad } = await import('./projects.ts');
+  const result = calculateCpemLoad({
+    concurrentEvs: 10,
+    powerPerEvKw: 120, // 1200 kW total
+    transformerCapacityKw: 800
+  });
+
+  assert.equal(result.totalRequestedKw, 1200);
+  assert.equal(result.actualDeliveredKw, 800);
+  assert.ok(result.curtailmentRatePct > 0);
+});
+
+test('calculateBbemEnergy computes net grid import and savings', async () => {
+  const { calculateBbemEnergy } = await import('./projects.ts');
+  const result = calculateBbemEnergy({
+    occupancyPct: 50,
+    pvSolarGenerationKw: 100,
+    batteryDischargeKw: 50
+  });
+
+  assert.ok(result.cleanEnergyRatioPct > 0);
+  assert.ok(result.demandChargeSavingsUsd > 0);
 });

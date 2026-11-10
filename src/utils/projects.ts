@@ -5,7 +5,15 @@ import {
   MedEvaluationResult, 
   BessSimulationInput, 
   BessSimulationResult,
-  CpmsTask
+  CpmsTask,
+  AidcSimulationInput,
+  AidcSimulationResult,
+  BatSohInput,
+  BatSohResult,
+  CpemInput,
+  CpemResult,
+  BbemInput,
+  BbemResult
 } from '../types/index.ts';
 
 /**
@@ -34,7 +42,8 @@ export function filterProjects(
       project.descriptionZh.toLowerCase().includes(query) ||
       project.tags.some(tag => tag.toLowerCase().includes(query)) ||
       project.tagsZh.some(tag => tag.toLowerCase().includes(query)) ||
-      project.techStack.some(tech => tech.toLowerCase().includes(query))
+      project.techStack.some(tech => tech.toLowerCase().includes(query)) ||
+      project.url.toLowerCase().includes(query)
     );
   });
 }
@@ -48,17 +57,9 @@ export function evaluateMedApplicant(input: MedEvaluationInput): MedEvaluationRe
   const clinical = Math.max(0, input.clinicalHours);
   const pubs = Math.max(0, input.researchPubs);
 
-  // Standardized scoring components
-  // GPA contribution (max 35 pts)
   const gpaScore = Math.max(0, ((gpa - 2.5) / 1.5)) * 35;
-  
-  // MCAT contribution (max 40 pts)
   const mcatScore = Math.max(0, ((mcat - 490) / 38)) * 40;
-  
-  // Clinical hours contribution (max 15 pts, cap at 600h)
   const clinicalScore = Math.min(15, (clinical / 600) * 15);
-  
-  // Research publications contribution (max 10 pts, cap at 3 pubs)
   const researchScore = Math.min(10, pubs * 3.33);
 
   const rawTotal = Math.round(gpaScore + mcatScore + clinicalScore + researchScore);
@@ -125,28 +126,21 @@ export function evaluateMedApplicant(input: MedEvaluationInput): MedEvaluationRe
 }
 
 /**
- * BESS System: Battery Energy Storage Simulation Calculation
+ * BESS / EMS-BESS: Battery Energy Storage Simulation Calculation
  */
 export function calculateBessSimulation(input: BessSimulationInput): BessSimulationResult {
   const { currentSoc, capacityKwh, chargeDischargeKw, electricityPricePerKwh } = input;
   
-  // Power exchanged over 1 hour (kWh)
-  const powerExchangedKwh = chargeDischargeKw; // 1 hr delta
-  
-  // Inverter round-trip thermal efficiency loss (approx 94% efficiency)
-  const thermalEfficiencyPct = chargeDischargeKw === 0 ? 100 : 94.2;
+  const powerExchangedKwh = chargeDischargeKw;
+  const thermalEfficiencyPct = chargeDischargeKw === 0 ? 100 : 94.6;
   const effectiveKwh = chargeDischargeKw > 0 
     ? powerExchangedKwh * (thermalEfficiencyPct / 100) 
     : powerExchangedKwh / (thermalEfficiencyPct / 100);
 
-  // New SoC clamped between 5% (depth of discharge buffer) and 100%
   const socDeltaPct = (effectiveKwh / capacityKwh) * 100;
   const rawSoc = currentSoc + socDeltaPct;
   const newSoc = Math.min(100, Math.max(5, Math.round(rawSoc * 10) / 10));
 
-  // Cost or savings:
-  // Charging (kw > 0): consumes electricity -> cost = powerExchangedKwh * price
-  // Discharging (kw < 0): injects electricity to grid/facility -> savings = -powerExchangedKwh * price
   const costImpactUsd = Math.round(powerExchangedKwh * electricityPricePerKwh * 100) / 100;
 
   let recommendation: BessSimulationResult['recommendation'] = 'Hold Reserve';
@@ -219,5 +213,134 @@ export function calculateCpmsMetrics(tasks: CpmsTask[]): {
     highRiskCount,
     healthStatus,
     healthStatusZh
+  };
+}
+
+/**
+ * AIDC: AI Data Center PUE & Thermal Simulation
+ */
+export function calculateAidcSimulation(input: AidcSimulationInput): AidcSimulationResult {
+  const { gpuUtilizationPct, ambientTempC, rackPowerKw } = input;
+  // Dynamic cooling power calculation based on ambient temp and thermal dissipation
+  const baseCoolingRatio = 0.12; // 12% cooling overhead under ideal 20°C
+  const tempOverhead = Math.max(0, (ambientTempC - 20) * 0.006);
+  const loadOverhead = (gpuUtilizationPct / 100) * 0.05;
+  const coolingPowerKw = Math.round(rackPowerKw * (baseCoolingRatio + tempOverhead + loadOverhead) * 10) / 10;
+  const totalFacilityPowerKw = Math.round((rackPowerKw + coolingPowerKw) * 10) / 10;
+  const pue = Math.round((totalFacilityPowerKw / rackPowerKw) * 100) / 100;
+
+  let efficiencyTier: AidcSimulationResult['efficiencyTier'] = 'Optimal';
+  let efficiencyTierZh = '超高能效等级 (PUE < 1.20)';
+
+  if (pue > 1.30) {
+    efficiencyTier = 'Warning';
+    efficiencyTierZh = '能效告警 (建议提高冷板流速)';
+  } else if (pue > 1.22) {
+    efficiencyTier = 'Standard';
+    efficiencyTierZh = '标准数据中心能效区间';
+  }
+
+  return {
+    pue,
+    coolingPowerKw,
+    totalFacilityPowerKw,
+    efficiencyTier,
+    efficiencyTierZh
+  };
+}
+
+/**
+ * BAT-SOH: Battery State-of-Health & Degradation Prediction
+ */
+export function calculateBatSoh(input: BatSohInput): BatSohResult {
+  const { cycles, chargeCRate, avgOperatingTempC, dodPct } = input;
+
+  // Base degradation from cycles (approx 0.005% per cycle under standard 1C, 25C, 80% DoD)
+  const cRateMultiplier = 1 + Math.max(0, (chargeCRate - 1) * 0.5);
+  const tempMultiplier = avgOperatingTempC > 30 ? 1 + (avgOperatingTempC - 30) * 0.03 : 1;
+  const dodMultiplier = dodPct / 80;
+
+  const totalDegradation = (cycles * 0.0055) * cRateMultiplier * tempMultiplier * dodMultiplier;
+  const rawSoh = 100 - totalDegradation;
+  const sohPct = Math.min(100, Math.max(60, Math.round(rawSoh * 10) / 10));
+
+  // Internal resistance increases as SOH drops
+  const internalResistanceMohm = Math.round((28 + (100 - sohPct) * 0.8) * 10) / 10;
+  const remainingUsefulCycles = Math.max(0, Math.round((sohPct - 75) / (0.0055 * cRateMultiplier * tempMultiplier * dodMultiplier)));
+
+  let thermalRunawayRisk: BatSohResult['thermalRunawayRisk'] = 'Low';
+  let thermalRunawayRiskZh = '安全稳态 (内阻与温升在标称安全域)';
+
+  if (sohPct < 75 || avgOperatingTempC >= 45) {
+    thermalRunawayRisk = 'Elevated';
+    thermalRunawayRiskZh = '高温加速老化高风险区间';
+  } else if (sohPct < 85 || avgOperatingTempC >= 38) {
+    thermalRunawayRisk = 'Moderate';
+    thermalRunawayRiskZh = '中度健康衰退预警';
+  }
+
+  return {
+    sohPct,
+    internalResistanceMohm,
+    remainingUsefulCycles,
+    thermalRunawayRisk,
+    thermalRunawayRiskZh
+  };
+}
+
+/**
+ * CPEM: Charging Pile Energy Management & Group Control
+ */
+export function calculateCpemLoad(input: CpemInput): CpemResult {
+  const { concurrentEvs, powerPerEvKw, transformerCapacityKw } = input;
+  const totalRequestedKw = concurrentEvs * powerPerEvKw;
+
+  let actualDeliveredKw = totalRequestedKw;
+  let curtailmentRatePct = 0;
+  let safetyStatus: CpemResult['safetyStatus'] = 'Safe';
+  let safetyStatusZh = '电网容量充裕，全功率无损供给';
+
+  if (totalRequestedKw > transformerCapacityKw) {
+    actualDeliveredKw = transformerCapacityKw;
+    curtailmentRatePct = Math.round(((totalRequestedKw - transformerCapacityKw) / totalRequestedKw) * 100);
+    safetyStatus = 'Curtailed';
+    safetyStatusZh = '触发群控动态功率削峰限流保护';
+  }
+
+  const transformerLoadPct = Math.min(100, Math.round((actualDeliveredKw / transformerCapacityKw) * 100));
+
+  if (transformerLoadPct >= 95) {
+    safetyStatus = 'Overload Warning';
+    safetyStatusZh = '变压器满载运行，建议限制新接入车辆';
+  }
+
+  return {
+    totalRequestedKw,
+    actualDeliveredKw,
+    curtailmentRatePct,
+    transformerLoadPct,
+    safetyStatus,
+    safetyStatusZh
+  };
+}
+
+/**
+ * BBEM: Building & Battery Energy Management
+ */
+export function calculateBbemEnergy(input: BbemInput): BbemResult {
+  const { occupancyPct, pvSolarGenerationKw, batteryDischargeKw } = input;
+  // Building base load is scaled by occupancy (100 kW to 350 kW)
+  const baseBuildingLoadKw = Math.round(100 + (occupancyPct / 100) * 250);
+  const onsiteCleanPowerKw = pvSolarGenerationKw + batteryDischargeKw;
+  const netGridImportKw = Math.max(0, baseBuildingLoadKw - onsiteCleanPowerKw);
+  const cleanEnergyRatioPct = Math.min(100, Math.round((Math.min(baseBuildingLoadKw, onsiteCleanPowerKw) / baseBuildingLoadKw) * 100));
+  // Demand charge saved: $18 per kW shaved
+  const demandChargeSavingsUsd = Math.round(Math.min(baseBuildingLoadKw, onsiteCleanPowerKw) * 18);
+
+  return {
+    baseBuildingLoadKw,
+    netGridImportKw,
+    cleanEnergyRatioPct,
+    demandChargeSavingsUsd
   };
 }

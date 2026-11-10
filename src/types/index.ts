@@ -15,8 +15,10 @@ export interface ProjectTech {
   category: string;
 }
 
+export type ProjectId = 'aidc' | 'ems-bess' | 'bbem' | 'bat-soh' | 'cpms' | 'cpem' | 'med';
+
 export interface ProjectItem {
-  id: 'med' | 'bess' | 'cpms';
+  id: ProjectId;
   title: string;
   titleZh: string;
   subTitle: string;
@@ -29,10 +31,10 @@ export interface ProjectItem {
   categoryLabel: string;
   categoryLabelZh: string;
   url: string;
-  themeColor: 'indigo' | 'purple' | 'pink';
+  themeColor: 'indigo' | 'purple' | 'pink' | 'emerald' | 'cyan' | 'amber';
   accentHex: string;
   glowColor: string;
-  iconName: 'stethoscope' | 'zap' | 'barChart';
+  iconName: string;
   iconEmoji: string;
   tags: string[];
   tagsZh: string[];
@@ -44,7 +46,7 @@ export interface ProjectItem {
     descZh: string;
   }[];
   techStack: string[];
-  demoType: 'med' | 'bess' | 'cpms';
+  demoType: ProjectId;
 }
 
 export interface MedEvaluationInput {
@@ -87,4 +89,61 @@ export interface CpmsTask {
   priority: 'low' | 'medium' | 'high' | 'critical';
   riskScore: number; // 1-100
   owner: string;
+}
+
+export interface AidcSimulationInput {
+  gpuUtilizationPct: number; // 20 - 100%
+  ambientTempC: number; // 15 - 40 C
+  rackPowerKw: number; // 20 - 80 kW
+}
+
+export interface AidcSimulationResult {
+  pue: number;
+  coolingPowerKw: number;
+  totalFacilityPowerKw: number;
+  efficiencyTier: 'Optimal' | 'Standard' | 'Warning';
+  efficiencyTierZh: string;
+}
+
+export interface BatSohInput {
+  cycles: number; // 0 - 5000
+  chargeCRate: number; // 0.2 - 2.0 C
+  avgOperatingTempC: number; // 15 - 55 C
+  dodPct: number; // 50 - 100%
+}
+
+export interface BatSohResult {
+  sohPct: number; // 100% -> 70%
+  internalResistanceMohm: number;
+  remainingUsefulCycles: number;
+  thermalRunawayRisk: 'Low' | 'Moderate' | 'Elevated';
+  thermalRunawayRiskZh: string;
+}
+
+export interface CpemInput {
+  concurrentEvs: number; // 1 - 20
+  powerPerEvKw: number; // 30 - 350 kW
+  transformerCapacityKw: number; // e.g. 1000 kW
+}
+
+export interface CpemResult {
+  totalRequestedKw: number;
+  actualDeliveredKw: number;
+  curtailmentRatePct: number;
+  transformerLoadPct: number;
+  safetyStatus: 'Safe' | 'Curtailed' | 'Overload Warning';
+  safetyStatusZh: string;
+}
+
+export interface BbemInput {
+  occupancyPct: number; // 10 - 100%
+  pvSolarGenerationKw: number; // 0 - 200 kW
+  batteryDischargeKw: number; // 0 - 150 kW
+}
+
+export interface BbemResult {
+  baseBuildingLoadKw: number;
+  netGridImportKw: number;
+  cleanEnergyRatioPct: number;
+  demandChargeSavingsUsd: number;
 }

@@ -39,7 +39,7 @@ export default function App() {
       />
 
       {/* Main Container */}
-      <main className="flex-1 w-full max-w-6xl mx-auto px-4 sm:px-6">
+      <main className="flex-1 w-full max-w-7xl mx-auto px-3.5 sm:px-6">
         
         {/* Hero Section */}
         <HeroSection
@@ -52,21 +52,21 @@ export default function App() {
         />
 
         {/* Project Cards Section */}
-        <section className="mt-4 mb-16">
-          <div className="flex items-center justify-between mb-6 px-1">
+        <section className="mt-1 mb-8">
+          <div className="flex items-center justify-between mb-3 px-1">
             <div className="flex items-center gap-2">
-              <span className="w-2.5 h-2.5 rounded-full bg-indigo-600"></span>
-              <h2 className="text-lg sm:text-xl font-bold tracking-tight text-slate-900">
+              <span className="w-2 h-2 rounded-full bg-indigo-600"></span>
+              <h2 className="text-base sm:text-lg font-bold tracking-tight text-slate-900">
                 {lang === 'zh' ? '核心 AI 旗舰系统' : 'Core Flagship Platforms'}
               </h2>
             </div>
-            <span className="text-xs font-mono font-medium text-slate-500">
+            <span className="text-[11px] font-mono font-medium text-slate-500">
               {filteredProjects.length} {lang === 'zh' ? '个系统已就绪' : 'Systems Online'}
             </span>
           </div>
 
           {filteredProjects.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3.5">
               {filteredProjects.map(project => (
                 <ProjectCard
                   key={project.id}
