@@ -44,14 +44,6 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
       <div className="relative z-10 max-w-4xl mx-auto px-4 sm:px-6">
         
-        {/* Status Pill Badge */}
-        <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full border border-indigo-200 bg-indigo-50/90 text-indigo-700 text-[11px] font-medium mb-2.5 shadow-2xs backdrop-blur-md">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span>{lang === 'zh' ? '人工智能驱动的高可用系统工程' : 'AI-Powered Software Suite'}</span>
-          <span className="text-indigo-300">•</span>
-          <span className="font-mono text-[10px] text-indigo-600 font-semibold">v2.6 Live</span>
-        </div>
-
         {/* Hero Title */}
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-slate-900 via-indigo-950 to-slate-900 mb-2 leading-tight">
           George Zhang's AI Projects
