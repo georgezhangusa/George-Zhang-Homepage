@@ -51,7 +51,7 @@ export const Navbar: React.FC<NavbarProps> = ({ lang, onSelectLang, onOpenContac
               George Zhang
             </span>
             <p className="text-[10px] text-slate-500 hidden sm:block font-light leading-none mt-0.5">
-              {lang === 'zh' ? '人工智能驱动软件生态系统' : 'AI-Powered Software Suite'}
+              {lang === 'zh' ? '人工智能软件生态系统架构师' : 'AI Developer & Software Architect'}
             </p>
           </div>
         </a>
