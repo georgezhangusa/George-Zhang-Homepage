@@ -55,13 +55,13 @@ export const FounderSection: React.FC<FounderSectionProps> = ({ lang, onOpenCont
 
               {/* Action buttons */}
               <div className="flex items-center justify-center md:justify-end gap-1.5">
-                <button
-                  onClick={onOpenContact}
-                  className="px-2.5 py-1 rounded-lg text-[11px] font-semibold text-white bg-indigo-600 hover:bg-indigo-700 transition-colors flex items-center gap-1 cursor-pointer shadow-xs shadow-indigo-600/30"
+                <a
+                  href={`mailto:${FOUNDER_INFO.email}`}
+                  className="px-2.5 py-1 rounded-lg text-[11px] font-semibold text-white bg-indigo-600 hover:bg-indigo-700 transition-colors flex items-center gap-1.5 cursor-pointer shadow-xs shadow-indigo-600/30"
                 >
                   <Mail className="w-3 h-3" />
-                  <span>{lang === 'zh' ? '发送消息' : 'Send Message'}</span>
-                </button>
+                  <span>Email: {FOUNDER_INFO.email}</span>
+                </a>
                 <a
                   href="https://gz2ai.com"
                   target="_blank"

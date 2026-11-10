@@ -357,7 +357,7 @@ export const FOUNDER_INFO = {
   name: 'George Zhang',
   role: 'AI Engineer & Software Architect',
   roleZh: '人工智能工程师 & 软件系统架构师',
-  email: 'gzhang.v@gmail.com',
+  email: 'info@gz2ai.com',
   domain: 'gz2ai.com',
   bio: 'Architecting high-concurrency intelligence systems across AI data centers, industrial battery storage analytics, smart charging networks, and medical decision workflows.',
   bioZh: '深耕人工智能与高可靠软件系统架构，主导 AI 智算中心基础设施、储能全生命周期时序优化、超充网络群控与医疗临床决策引擎的工程化落地。',
