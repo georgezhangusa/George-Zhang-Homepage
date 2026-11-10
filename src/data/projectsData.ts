@@ -7,7 +7,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
     titleZh: 'AIDC 智算中心基础设施设计平台',
     subTitle: 'AI Data Center Infrastructure & Thermal Design Studio',
     subTitleZh: 'AI 智算集群能效优化与液冷温控设计平台',
-    description: 'High-density AI data center infrastructure design suite optimizing GPU compute loads, power usage effectiveness (PUE), liquid cooling loops, and power distribution.',
+    description: 'High-density AI data center infrastructure design suite that optimizes GPU compute loads, power usage effectiveness (PUE), liquid cooling loops, and power distribution.',
     descriptionZh: '高密度 AI 算力中心智能基础设施设计平台，动态优化集群算力负载、PUE 能效比、冷板液冷散热与电力分配调度。',
     fullOverview: 'AIDC (AI Data Center Management) unifies server cluster telemetry, rack thermal profiling, dynamic liquid cooling loops, and intelligent power distribution. It maintains sub-1.20 PUE even under sustained high-wattage LLM training runs.',
     fullOverviewZh: 'AIDC 智算基础设施管理平台深度集成服务器集群遥测、机柜热力拓扑建模、动态冷板液冷闭环调控及智能配电单元，在千卡/万卡大模型高负载持续训练下将 PUE 稳定控制在 1.20 以下。',
