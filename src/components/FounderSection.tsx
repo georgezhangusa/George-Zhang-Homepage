@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mail, Globe } from 'lucide-react';
+import { Mail } from 'lucide-react';
 import { Language } from '../types/index.ts';
 import { FOUNDER_INFO } from '../data/projectsData.ts';
 
@@ -61,15 +61,6 @@ export const FounderSection: React.FC<FounderSectionProps> = ({ lang, onOpenCont
                 >
                   <Mail className="w-3 h-3" />
                   <span>Email: {FOUNDER_INFO.email}</span>
-                </a>
-                <a
-                  href="https://gz2ai.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="px-2.5 py-1 rounded-lg text-[11px] font-semibold text-slate-700 hover:text-slate-900 bg-white hover:bg-slate-100 border border-slate-200 transition-colors flex items-center gap-1 shadow-2xs"
-                >
-                  <Globe className="w-3 h-3" />
-                  <span>gz2ai.com</span>
                 </a>
               </div>
             </div>
