@@ -50,7 +50,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         </h1>
 
         {/* Subtitle */}
-        <p className="text-slate-600 text-xs sm:text-sm font-normal max-w-2xl mx-auto leading-relaxed mb-4">
+        <p className="text-slate-600 text-xs sm:text-sm font-bold max-w-2xl mx-auto leading-relaxed mb-4">
           {lang === 'zh'
             ? '探索以人工智能为驱动的下一代软件生态系统'
             : 'Exploring next-generation AI-driven software ecosystems'}
