@@ -113,6 +113,8 @@ export const Navbar: React.FC<NavbarProps> = ({ lang, onSelectLang, onOpenContac
           {/* Contact Button */}
           <button
             onClick={onOpenContact}
+            title={lang === 'zh' ? '发邮件至 info@gz2ai.com' : 'Email: info@gz2ai.com'}
+            aria-label={lang === 'zh' ? '联系作者 (info@gz2ai.com)' : 'Contact author at info@gz2ai.com'}
             className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium text-indigo-700 hover:text-indigo-800 bg-indigo-50 hover:bg-indigo-100 border border-indigo-200 transition-all cursor-pointer shadow-2xs"
           >
             <Mail className="w-3.5 h-3.5" />
