@@ -52,8 +52,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
         {/* Subtitle */}
         <p className="text-slate-600 text-xs sm:text-sm font-normal max-w-2xl mx-auto leading-relaxed mb-4">
           {lang === 'zh'
-            ? '探索以人工智能为驱动的下一代软件生态系统：涵盖医疗临床推理、工业电池储能时序优化与企业级精细化项目运营平台。'
-            : 'Exploring next-generation AI-driven software ecosystems: clinical diagnostic reasoning, industrial battery storage telemetry, and enterprise workflow execution.'}
+            ? '探索以人工智能为驱动的下一代软件生态系统'
+            : 'Exploring next-generation AI-driven software ecosystems'}
         </p>
 
         {/* Search & Category Filter Controls */}

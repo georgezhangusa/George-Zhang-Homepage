@@ -51,8 +51,8 @@ export const ArchitectureSection: React.FC<ArchitectureSectionProps> = ({ lang }
         </h2>
         <p className="text-sm text-slate-600 max-w-xl mx-auto font-normal">
           {lang === 'zh'
-            ? '从医疗临床决策到清洁能源微电网，所有系统均依托统一的工业级工程规范与高并发基座。'
-            : 'From clinical diagnostic reasoning to clean energy microgrid dispatch, all platforms share a rigorous architectural foundation.'}
+            ? '从清洁能源、储能、充电桩、微电网及虚拟电网（VPP）到AI数据中心，所有系统均依托统一的工业级工程规范与高并发基座。'
+            : 'From renewable energy, storage, EV charger， microgrid, and virtual power plant (VPP) to AI data center, all platforms share a rigorous architectural foundation.'}
         </p>
       </div>
 
