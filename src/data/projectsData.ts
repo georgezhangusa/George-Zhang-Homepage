@@ -53,7 +53,7 @@ export const PROJECTS_DATA: ProjectItem[] = [
   },
   {
     id: 'ems-bess',
-    title: 'EMS for BESS',
+    title: 'Energy Management System (EMS) for BESS',
     titleZh: '商用电池储能智能能量管理系统（EMS）',
     subTitle: 'Industrial Energy Management & Grid Telemetry Intelligence',
     subTitleZh: '工业级电池储能能量管理与毫秒级电网响应平台',
@@ -103,8 +103,8 @@ export const PROJECTS_DATA: ProjectItem[] = [
   },
   {
     id: 'bbem',
-    title: 'DePIN & VDR Energy Platform',
-    titleZh: '区块链综合能源盈利模型',
+    title: 'Renewable Energy VPP Monetization ',
+    titleZh: '区块链可再生能源盈利模型',
     subTitle: 'Blockchain-Based Energy Monetization Platform',
     subTitleZh: '楼宇建筑与分布式电池一体化能源综合管控平台',
     description: 'Blockchain-based energy monetization models that enable energy arbitrage using PV solar generation, battery storage systems (BESS), and vehicle-to-grid (V2G) technology as a Virtual Power Plant (VPP).',
