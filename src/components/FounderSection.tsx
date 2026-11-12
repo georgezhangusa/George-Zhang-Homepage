@@ -28,7 +28,7 @@ export const FounderSection: React.FC<FounderSectionProps> = ({ lang, onOpenCont
                 <span className="text-xl sm:text-2xl font-extrabold font-mono tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-indigo-300 via-purple-300 to-pink-300">
                   GZ
                 </span>
-                <span className="text-[8px] font-mono text-indigo-400">
+                <span className="text-[10px] font-mono text-indigo-300">
                   gz2ai.com
                 </span>
               </div>
@@ -44,11 +44,11 @@ export const FounderSection: React.FC<FounderSectionProps> = ({ lang, onOpenCont
               <div>
                 <h3 className="text-base sm:text-lg font-bold text-slate-900 flex items-center justify-center md:justify-start gap-2">
                   <span>{FOUNDER_INFO.name}</span>
-                  <span className="px-2 py-0.5 rounded-full text-[9px] font-mono bg-indigo-50 text-indigo-700 border border-indigo-200 font-semibold">
+                  <span className="px-2.5 py-0.5 rounded-full text-xs font-mono bg-indigo-50 text-indigo-700 border border-indigo-200 font-semibold">
                     Lead Architect
                   </span>
                 </h3>
-                <p className="text-[11px] text-indigo-600 font-semibold">
+                <p className="text-xs sm:text-sm text-indigo-600 font-semibold mt-0.5">
                   {lang === 'zh' ? FOUNDER_INFO.roleZh : FOUNDER_INFO.role}
                 </p>
               </div>
@@ -57,24 +57,24 @@ export const FounderSection: React.FC<FounderSectionProps> = ({ lang, onOpenCont
               <div className="flex items-center justify-center md:justify-end gap-1.5">
                 <a
                   href={`mailto:${FOUNDER_INFO.email}`}
-                  className="px-2.5 py-1 rounded-lg text-[11px] font-semibold text-white bg-indigo-600 hover:bg-indigo-700 transition-colors flex items-center gap-1.5 cursor-pointer shadow-xs shadow-indigo-600/30"
+                  className="px-3 py-1.5 rounded-lg text-xs font-semibold text-white bg-indigo-600 hover:bg-indigo-700 transition-colors flex items-center gap-1.5 cursor-pointer shadow-xs shadow-indigo-600/30"
                 >
-                  <Mail className="w-3 h-3" />
+                  <Mail className="w-3.5 h-3.5" />
                   <span>Email: {FOUNDER_INFO.email}</span>
                 </a>
               </div>
             </div>
 
-            <p className="text-[11.5px] text-slate-600 font-normal leading-relaxed max-w-3xl mb-2.5">
+            <p className="text-xs sm:text-sm text-slate-700 font-normal leading-relaxed max-w-3xl mb-3">
               {lang === 'zh' ? FOUNDER_INFO.bioZh : FOUNDER_INFO.bio}
             </p>
 
             {/* Core Competencies badges */}
-            <div className="flex flex-wrap items-center justify-center md:justify-start gap-1">
+            <div className="flex flex-wrap items-center justify-center md:justify-start gap-1.5">
               {FOUNDER_INFO.skills.map((skill, idx) => (
                 <span
                   key={idx}
-                  className="px-2 py-0.5 rounded text-[10px] font-mono font-medium bg-white border border-slate-200 text-slate-700 shadow-2xs"
+                  className="px-2.5 py-1 rounded-md text-xs font-mono font-medium bg-white border border-slate-200 text-slate-700 shadow-2xs"
                 >
                   {skill}
                 </span>

@@ -8,7 +8,7 @@ interface FooterProps {
 
 export const Footer: React.FC<FooterProps> = ({ lang }) => {
   return (
-    <footer className="mt-8 border-t border-slate-200 py-4 sm:py-5 bg-slate-100/90 text-slate-500 text-[11px]">
+    <footer className="mt-8 border-t border-slate-200 py-4 sm:py-5 bg-slate-100/90 text-xs sm:text-sm text-slate-600">
       <div className="max-w-7xl mx-auto px-3.5 sm:px-6 flex items-center justify-center text-center">
         
         {/* Copyright */}

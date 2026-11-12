@@ -83,14 +83,14 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, lang, onOpenM
           </div>
 
           <div className="flex items-center">
-            <span className={`px-2 py-0.5 rounded-full text-[10px] font-semibold border ${style.badgeBg}`}>
+            <span className={`px-2.5 py-0.5 rounded-full text-xs font-semibold border ${style.badgeBg}`}>
               {lang === 'zh' ? project.categoryLabelZh : project.categoryLabel}
             </span>
           </div>
         </div>
 
         {/* Title */}
-        <h2 className="text-sm sm:text-base font-bold mb-1.5 leading-snug">
+        <h2 className="text-base sm:text-[17px] font-bold mb-1.5 leading-snug">
           <a
             href={project.url}
             target="_blank"
@@ -101,22 +101,22 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, lang, onOpenM
           </a>
         </h2>
 
-        {/* Description - Full display without truncation */}
-        <p className="text-[11.5px] text-slate-600 font-normal leading-relaxed mb-3">
+        {/* Description - Full display with comfortable readability */}
+        <p className="text-xs sm:text-[13px] text-slate-600 font-normal leading-relaxed mb-3">
           {lang === 'zh' ? project.descriptionZh : project.description}
         </p>
 
         {/* Metrics Grid preview */}
-        <div className="grid grid-cols-2 gap-1.5 mb-2.5 p-2 rounded-lg bg-slate-50/90 border border-slate-100">
+        <div className="grid grid-cols-2 gap-2 mb-3 p-2.5 rounded-lg bg-slate-50/90 border border-slate-100">
           {project.metrics.slice(0, 2).map((m, idx) => (
             <div key={idx} className="flex flex-col min-w-0">
-              <span className="text-[9px] text-slate-500 truncate font-medium">
+              <span className="text-[11px] text-slate-500 truncate font-medium">
                 {lang === 'zh' ? m.labelZh : m.label}
               </span>
               <div className="flex items-baseline gap-1 mt-0.5 truncate">
-                <span className="text-xs font-bold font-mono text-slate-900 truncate">{m.value}</span>
+                <span className="text-sm font-bold font-mono text-slate-900 truncate">{m.value}</span>
                 {m.change && (
-                  <span className="text-[9px] font-mono text-emerald-600 font-semibold shrink-0">
+                  <span className="text-[11px] font-mono text-emerald-600 font-semibold shrink-0">
                     {m.change}
                   </span>
                 )}
@@ -126,11 +126,11 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, lang, onOpenM
         </div>
 
         {/* Tech Stack Chips */}
-        <div className="flex flex-wrap gap-1 mb-2.5">
+        <div className="flex flex-wrap gap-1.5 mb-3">
           {project.techStack.slice(0, 4).map((tech, idx) => (
             <span 
               key={idx} 
-              className="text-[9px] font-mono font-medium px-1.5 py-0.5 rounded bg-slate-100 border border-slate-200/60 text-slate-600"
+              className="text-[11px] font-mono font-medium px-2 py-0.5 rounded bg-slate-100 border border-slate-200/70 text-slate-700"
             >
               {tech}
             </span>
@@ -146,7 +146,7 @@ export const ProjectCard: React.FC<ProjectCardProps> = ({ project, lang, onOpenM
           rel="noopener noreferrer"
           aria-label={`Open ${project.title} on ${project.url}`}
           data-testid={`demo-btn-${project.id}`}
-          className={`w-full flex items-center justify-center gap-1.5 px-3 py-1.5 rounded-lg text-[11.5px] font-semibold border transition-all cursor-pointer shadow-2xs ${style.btnSecondary} hover:shadow-xs`}
+          className={`w-full flex items-center justify-center gap-1.5 px-3 py-2 rounded-lg text-xs sm:text-[13px] font-semibold border transition-all cursor-pointer shadow-2xs ${style.btnSecondary} hover:shadow-xs`}
         >
           <span>{lang === 'zh' ? '直接打开对应网页' : 'Open Website'}</span>
           <ExternalLink className="w-3.5 h-3.5" />

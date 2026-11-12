@@ -225,9 +225,9 @@ Sent from George Zhang AI Projects (https://gz2ai.com)`;
               </div>
             )}
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
               <div>
-                <label className="block text-[11px] font-semibold text-slate-700 mb-1">
+                <label className="block text-xs font-semibold text-slate-700 mb-1">
                   {lang === 'zh' ? '姓名 / 称呼' : 'Your Name'}
                 </label>
                 <input
@@ -236,12 +236,12 @@ Sent from George Zhang AI Projects (https://gz2ai.com)`;
                   value={formData.name}
                   onChange={e => setFormData({ ...formData, name: e.target.value })}
                   placeholder={lang === 'zh' ? '例如: Dr. Smith' : 'e.g. Alex Chen'}
-                  className="w-full px-3 py-2 rounded-xl text-xs bg-slate-50 border border-slate-200 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:bg-white focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors"
+                  className="w-full px-3 py-2 rounded-xl text-xs sm:text-sm bg-slate-50 border border-slate-200 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:bg-white focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors"
                 />
               </div>
 
               <div>
-                <label className="block text-[11px] font-semibold text-slate-700 mb-1">
+                <label className="block text-xs font-semibold text-slate-700 mb-1">
                   {lang === 'zh' ? '您的联系邮箱' : 'Your Email'}
                 </label>
                 <input
@@ -250,13 +250,13 @@ Sent from George Zhang AI Projects (https://gz2ai.com)`;
                   value={formData.email}
                   onChange={e => setFormData({ ...formData, email: e.target.value })}
                   placeholder="name@domain.com"
-                  className="w-full px-3 py-2 rounded-xl text-xs bg-slate-50 border border-slate-200 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:bg-white focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors"
+                  className="w-full px-3 py-2 rounded-xl text-xs sm:text-sm bg-slate-50 border border-slate-200 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:bg-white focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-[11px] font-semibold text-slate-700 mb-1">
+              <label className="block text-xs font-semibold text-slate-700 mb-1">
                 {lang === 'zh' ? '主题 / 咨询事项' : 'Subject'}
               </label>
               <input
@@ -265,12 +265,12 @@ Sent from George Zhang AI Projects (https://gz2ai.com)`;
                 value={formData.subject}
                 onChange={e => setFormData({ ...formData, subject: e.target.value })}
                 placeholder={lang === 'zh' ? '例如: 关于 BESS 系统接入合作' : 'e.g. Partnership inquiry, system integration'}
-                className="w-full px-3 py-2 rounded-xl text-xs bg-slate-50 border border-slate-200 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:bg-white focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors"
+                className="w-full px-3 py-2 rounded-xl text-xs sm:text-sm bg-slate-50 border border-slate-200 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:bg-white focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors"
               />
             </div>
 
             <div>
-              <label className="block text-[11px] font-semibold text-slate-700 mb-1">
+              <label className="block text-xs font-semibold text-slate-700 mb-1">
                 {lang === 'zh' ? '留言内容' : 'Message Details'}
               </label>
               <textarea
@@ -279,12 +279,12 @@ Sent from George Zhang AI Projects (https://gz2ai.com)`;
                 value={formData.message}
                 onChange={e => setFormData({ ...formData, message: e.target.value })}
                 placeholder={lang === 'zh' ? '简述您的业务需求或系统对接场景...' : 'Tell us about your use case or integration requirements...'}
-                className="w-full px-3 py-2 rounded-xl text-xs bg-slate-50 border border-slate-200 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:bg-white focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors resize-none"
+                className="w-full px-3 py-2 rounded-xl text-xs sm:text-sm bg-slate-50 border border-slate-200 text-slate-900 placeholder:text-slate-400 focus:outline-none focus:bg-white focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500 transition-colors resize-none"
               />
             </div>
 
             <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-3">
-              <p className="text-[11px] text-slate-500 text-left">
+              <p className="text-xs text-slate-600 text-left font-medium">
                 {lang === 'zh' ? '📨 提交将直达 info@gz2ai.com' : '📨 Sends directly to info@gz2ai.com'}
               </p>
 

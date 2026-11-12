@@ -60,7 +60,7 @@ export default function App() {
                 {lang === 'zh' ? '核心 AI 旗舰系统' : 'Core Flagship Platforms'}
               </h2>
             </div>
-            <span className="text-[11px] font-mono font-medium text-slate-500">
+            <span className="text-xs sm:text-[13px] font-mono font-semibold text-slate-600">
               {filteredProjects.length} {lang === 'zh' ? '个系统已就绪' : 'Systems Online'}
             </span>
           </div>
