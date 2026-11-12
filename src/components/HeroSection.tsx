@@ -20,9 +20,9 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 }) => {
   const categories: { id: ProjectCategory; label: string; labelZh: string }[] = [
     { id: 'all', label: 'All Projects', labelZh: '全部项目' },
-    { id: 'healthcare', label: 'Healthcare & Med', labelZh: '医疗健康' },
     { id: 'energy', label: 'CleanTech & Energy', labelZh: '储能与算力' },
     { id: 'enterprise', label: 'Enterprise Systems', labelZh: '企业核心系统' },
+    { id: 'healthcare', label: 'Other', labelZh: '其它' },
   ];
 
   return (
